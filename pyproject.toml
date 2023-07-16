@@ -1,15 +1,16 @@
 [tool.poetry]
-name = ">>> YOUR PROJECT NAME"
+name = "Graceful PokeAPI"
 version = "0.1.0"
-description = ">>> YOUR PROJECT DESCRIPTION"
+description = "Asynchronous PokeAPI client extensible powered by Gracy"
 authors = ["Guilherme Latrova <hello@guilatrova.dev>"]
-license = ">>> LICENSE"
+license = "MIT"
 packages = [
-    { include = ">>> YOUR PACKAGE NAME", from = "src" },
+    { include = "gpokeapi", from = "src" },
 ]
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<4.0"
+gracy = "^1.25.0"
 
 
 [tool.poetry.group.dev.dependencies]
