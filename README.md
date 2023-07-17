@@ -1,13 +1,11 @@
 <p align="center">
-    <!-- 1. Update your logos, decide if you want light/dark variants -->
-    <img src="./img/logo-dark.png#gh-dark-mode-only">
-    <img src="./img/logo-light.png#gh-light-mode-only">
+    <img width="200px" src="./img/logo.svg">
 </p>
 
-<!-- 2. Rename to your project -->
+
 <h2 align="center">Graceful PokeApi</h2>
 
-<!-- 3. Replace/Add with your own username/repo -->
+
 <p align="center">
   <!-- CI --><a href="https://github.com/guilatrova/graceful_pokeapi/actions"><img alt="Actions Status" src="https://github.com/guilatrova/graceful_pokeapi/workflows/CI/badge.svg"></a>
   <!-- PyPI --><a href="https://pypi.org/project/graceful_pokeapi/"><img alt="PyPI" src="https://img.shields.io/pypi/v/graceful_pokeapi"/></a>
@@ -20,7 +18,6 @@
   <!-- Follow handle --><a href="https://twitter.com/intent/user?screen_name=guilatrova"><img alt="Follow guilatrova" src="https://img.shields.io/twitter/follow/guilatrova?style=social"/></a>
 </p>
 
-<!-- 4. Give it a description -->
 [PokeAPI](https://pokeapi.co/) client powered by [Gracy](https://github.com/guilatrova/gracy).
 
 ---
