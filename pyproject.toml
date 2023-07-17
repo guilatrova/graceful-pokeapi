@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Asynchronous PokeAPI client extensible powered by Gracy"
 authors = ["Guilherme Latrova <hello@guilatrova.dev>"]
 license = "MIT"
+readme = "README.md"
 packages = [
     { include = "gpokeapi", from = "src" },
 ]
