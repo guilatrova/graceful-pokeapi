@@ -22,4 +22,72 @@
 
 ---
 
-<!-- Add more content here -->
+## Get Started
+
+```
+pip install graceful_pokeapi
+```
+
+or
+
+```
+poetry add graceful_pokeapi
+```
+
+### Usage
+
+```py
+from gpokeapi import PokeApi
+
+client = PokeApi()
+
+async def main():
+  pokemon = await client.get_pokemon("pikachu")
+  if pokemon:
+    print(f"{pokemon['name']} is no {pokemon['id']}")
+
+  pokemon = await client.get_pokemon("nonexisting")
+  print(pokemon)  # outputs NONE
+```
+
+### Cache Types
+
+This API Client caches the requests by default through [Gracy Replays](https://github.com/guilatrova/gracy#replay-requests).
+
+You can choose between `memory`, `sqlite` or your own storage.
+
+```py
+client = PokeApi(cache="memory") # default
+client = PokeApi(cache="sqlite")
+client = PokeApi(cache=custom_gracy_replay) # Extend with your own
+```
+
+## Customization
+
+Since PokeAPI uses Gracy, everything is customizable.
+
+You can implement throttling, parsers, logging, retry logic and anything else by extending the class and setting your own settings.
+
+```py
+from gracy import GracyConfig
+
+
+class ResourceNotFound(Exception):
+  pass
+
+
+class MyCustomPokeApi(PokeApi):
+  class Config(PokeApi.Config):
+    SETTINGS = GracyConfig(
+            parser={
+                HTTPStatus.OK: lambda resp: resp.json(),
+                HTTPStatus.NOT_FOUND: ResourceNotFound,
+            },
+            strict_status_code=HTTPStatus.OK,
+            log_errors=LogEvent(LogLevel.CRITICAL),
+            log_request=LogEvent(LogLevel.INFO),
+        )
+```
+
+
+You can find all available options on [Gracy's documentation](https://github.com/guilatrova/gracy).
