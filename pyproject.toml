@@ -36,7 +36,7 @@ packages = [
 
 [tool.semantic_release]
 version_variable = [
-    "src/graceful_pokeapi/__init__.py:__version__"
+    "src/gpokeapi/__init__.py:__version__"
 ]
 version_toml = [
     "pyproject.toml:tool.poetry.version"
