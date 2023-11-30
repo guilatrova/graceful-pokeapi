@@ -5,7 +5,8 @@ class PokeApiEndpoint(BaseEndpoint):
     ABILITY = "/ability/{KEY}"
 
     # Berry Namespace
-    BERRY = "/berry/{KEY}"
+    BERRY_LIST = "/berry/"
+    BERRY_GET = "/berry/{KEY}"
     BERRY_FLAVOR = "/berry-flavor/{KEY}"
     BERRY_FIRMNESS = "/berry-firmness/{KEY}"
 
