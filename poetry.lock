@@ -459,13 +459,13 @@ gitdb = ">=4.0.1,<5"
 
 [[package]]
 name = "gracy"
-version = "1.25.0"
+version = "1.28.1"
 description = "Gracefully manage your API interactions"
 optional = false
 python-versions = ">=3.8.1,<4.0"
 files = [
-    {file = "gracy-1.25.0-py3-none-any.whl", hash = "sha256:39e6567e53ac91f34b2a6aff7cf28b499bd24c435e1383eb7d432f41e7e29f4b"},
-    {file = "gracy-1.25.0.tar.gz", hash = "sha256:688bd1a9cc6e6436a9e6fdb1edb582d603db818f4694e8bbe0f0d02ce6235427"},
+    {file = "gracy-1.28.1-py3-none-any.whl", hash = "sha256:3694654c86e8d146f651bdec87a8dcef00f4e94cfffc8bc027c88140dc76eb24"},
+    {file = "gracy-1.28.1.tar.gz", hash = "sha256:3073a4967e2a9d156ce6e80cc504b2ee247adcef12b0d37fa6cca08b017c2823"},
 ]
 
 [package.dependencies]
@@ -1444,4 +1444,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8.1,<4.0"
-content-hash = "18ae2d46efd6d57d1482a80b77c100f9b8671735346d36667cd42974c4c0b245"
+content-hash = "ebed31011e76f55b48939a6706f6ac20d354604ad120ee4a682ca662ba135c79"
