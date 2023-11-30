@@ -1,4 +1,4 @@
-from .clients import PokeApi, PokeApiEndpoint
+from .clients.api import PokeApi, PokeApiEndpoint
 
 __version__ = "0.1.0"
 
