@@ -11,6 +11,9 @@ class PokeApiEndpoint(BaseEndpoint):
     BERRY_FIRMNESS = "/berry-firmness/{KEY}"
 
     CHARACTERISTIC = "/characteristic/{KEY}"
+
+    # Contest Namespace
+    CONTEST_SUPER_EFFECT = "/super-contest-effect/{KEY}"
     CONTEST_EFFECT = "/contest-effect/{KEY}"
     CONTEST_TYPE = "/contest-type/{KEY}"
 

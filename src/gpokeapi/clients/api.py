@@ -5,6 +5,7 @@ from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_re
 from gracy.replays.storages.sqlite import SQLiteReplayStorage
 
 from gpokeapi.clients.berries import BerryNamespace
+from gpokeapi.clients.contests import ContestNamespace
 from gpokeapi.clients.encounters import EncountersNamespace
 from gpokeapi.clients.evolutions import EvolutionNamespace
 from gpokeapi.clients.items import ItemNamespace
@@ -51,6 +52,7 @@ class PokeApi(Gracy[PokeApiEndpoint]):
         self._encounter_ns = EncountersNamespace(self)
         self._move_ns = MoveNamespace(self)
         self._evolution_ns = EvolutionNamespace(self)
+        self._contest_ns = ContestNamespace(self)
 
     @property
     def pokemon(self):
@@ -76,6 +78,10 @@ class PokeApi(Gracy[PokeApiEndpoint]):
     def evolution(self):
         return self._evolution_ns
 
+    @property
+    def contest(self):
+        return self._contest_ns
+
     @parsed_response(DICT_OR_NONE)
     async def get_ability(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.ABILITY, dict(KEY=str(name_or_id)))
@@ -83,14 +89,6 @@ class PokeApi(Gracy[PokeApiEndpoint]):
     @parsed_response(DICT_OR_NONE)
     async def get_characteristic(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.CHARACTERISTIC, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_contest_effect(self, id: int):
-        return await self.get(PokeApiEndpoint.CONTEST_EFFECT, dict(KEY=str(id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_contest_type(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.CONTEST_TYPE, dict(KEY=str(name_or_id)))
 
     @parsed_response(DICT_OR_NONE)
     async def get_egg_group(self, name_or_id: t.Union[str, int]):
