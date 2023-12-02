@@ -21,10 +21,10 @@ class ResourceList(t.TypedDict):
     count: int
     """The total number of resources available from this API."""
 
-    next: str
+    next: t.Optional[str]
     """The URL for the next page in the list."""
 
-    previous: str
+    previous: t.Optional[str]
     """The URL for the previous page in the list."""
 
     results: list[ResourceReference]

@@ -10,10 +10,9 @@ from gpokeapi.clients.encounters import EncountersNamespace
 from gpokeapi.clients.evolutions import EvolutionNamespace
 from gpokeapi.clients.items import ItemNamespace
 from gpokeapi.clients.moves import MoveNamespace
+from gpokeapi.clients.pokemons import PokemonNamespace
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.replays import InMemoryStorage
-
-from .pokemons import PokemonNamespace
 
 CACHE_TYPE = t.Union[t.Literal["memory", "sqlite"], GracyReplay]
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
