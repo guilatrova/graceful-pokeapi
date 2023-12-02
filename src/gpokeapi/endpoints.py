@@ -68,7 +68,6 @@ class PokeApiEndpoint(BaseEndpoint):
 
     REGION = "/region/{KEY}"
     STAT = "/stat/{KEY}"
-    SUPER_CONTEST_EFFECT = "/super-contest-effect/{KEY}"
     TYPE = "/type/{KEY}"
     VERSION = "/version/{KEY}"
     VERSION_GROUP = "/version-group/{KEY}"

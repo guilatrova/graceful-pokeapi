@@ -1,9 +1,6 @@
 import typing as t
 from http import HTTPStatus
 
-from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_response
-from gracy.replays.storages.sqlite import SQLiteReplayStorage
-
 from gpokeapi.clients.berries import BerryNamespace
 from gpokeapi.clients.contests import ContestNamespace
 from gpokeapi.clients.encounters import EncountersNamespace
@@ -13,6 +10,8 @@ from gpokeapi.clients.moves import MoveNamespace
 from gpokeapi.clients.pokemons import PokemonNamespace
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.replays import InMemoryStorage
+from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_response
+from gracy.replays.storages.sqlite import SQLiteReplayStorage
 
 CACHE_TYPE = t.Union[t.Literal["memory", "sqlite"], GracyReplay]
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
@@ -82,28 +81,8 @@ class PokeApi(Gracy[PokeApiEndpoint]):
         return self._contest_ns
 
     @parsed_response(DICT_OR_NONE)
-    async def get_ability(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.ABILITY, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_characteristic(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.CHARACTERISTIC, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_egg_group(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.EGG_GROUP, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_gender(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.GENDER, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
     async def get_generation(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.GENERATION, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_growth_rate(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.GROWTH_RATE, dict(KEY=str(name_or_id)))
 
     @parsed_response(DICT_OR_NONE)
     async def get_language(self, name_or_id: t.Union[str, int]):
@@ -122,16 +101,8 @@ class PokeApi(Gracy[PokeApiEndpoint]):
         return await self.get(PokeApiEndpoint.MACHINE, dict(KEY=str(name_or_id)))
 
     @parsed_response(DICT_OR_NONE)
-    async def get_nature(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.NATURE, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
     async def get_pal_park_area(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.PAL_PARK_AREA, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_pokeathlon_stat(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.POKEATHLON_STAT, dict(KEY=str(name_or_id)))
 
     @parsed_response(DICT_OR_NONE)
     async def get_pokedex(self, name_or_id: t.Union[str, int]):
@@ -140,18 +111,6 @@ class PokeApi(Gracy[PokeApiEndpoint]):
     @parsed_response(DICT_OR_NONE)
     async def get_region(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.REGION, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_stat(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.STAT, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_super_contest_effect(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.SUPER_CONTEST_EFFECT, dict(KEY=str(name_or_id)))
-
-    @parsed_response(DICT_OR_NONE)
-    async def get_type(self, name_or_id: t.Union[str, int]):
-        return await self.get(PokeApiEndpoint.TYPE, dict(KEY=str(name_or_id)))
 
     @parsed_response(DICT_OR_NONE)
     async def get_version(self, name_or_id: t.Union[str, int]):

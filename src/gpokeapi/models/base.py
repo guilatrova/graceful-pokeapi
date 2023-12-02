@@ -14,6 +14,11 @@ class ResourceName(t.TypedDict):
     """The language this name is in."""
 
 
+class FlavorText(t.TypedDict):
+    flavor_text: str
+    language: ResourceReference
+
+
 T = t.TypeVar("T")
 
 

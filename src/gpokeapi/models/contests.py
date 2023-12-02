@@ -1,6 +1,6 @@
 import typing as t
 
-from gpokeapi.models.base import ResourceName, ResourceReference
+from gpokeapi.models.base import FlavorText, ResourceName, ResourceReference
 
 
 class ContestName(ResourceName):
@@ -24,11 +24,6 @@ class ContestType(t.TypedDict):
 
 class EffectEntry(t.TypedDict):
     effect: str
-    language: ResourceReference
-
-
-class FlavorText(t.TypedDict):
-    flavor_text: str
     language: ResourceReference
 
 
