@@ -16,7 +16,7 @@ class InMemoryStorage(GracyReplayStorage):
         self._cache: t.Dict[CACHE_KEY, httpx.Response] = {}
 
     def _build_key(self, request: httpx.Request) -> CACHE_KEY:
-        return (request.method, str(request.url), request.content or None)
+        return (str(request.method), str(request.url), request.content or None)
 
     async def record(self, response: httpx.Response) -> None:
         key = self._build_key(response.request)

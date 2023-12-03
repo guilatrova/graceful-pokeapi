@@ -18,7 +18,7 @@ DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
 
 
 class PokeApi(Gracy[PokeApiEndpoint]):
-    class Config:  # type: ignore
+    class Config:
         BASE_URL = "https://pokeapi.co/api/v2/"
         REQUEST_TIMEOUT = 5.0
         SETTINGS = GracyConfig(
