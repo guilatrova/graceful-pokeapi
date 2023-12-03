@@ -13,7 +13,7 @@
         },
     },
     "python.testing.pytestArgs": [
-        "src/tests"
+        "tests"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,

@@ -46,41 +46,13 @@ class PokeApi(Gracy[PokeApiEndpoint]):
 
         super().__init__(replay=replay)
 
-        self._pokemon_ns = PokemonNamespace(self)
-        self._berry_ns = BerryNamespace(self)
-        self._item_ns = ItemNamespace(self)
-        self._encounter_ns = EncountersNamespace(self)
-        self._move_ns = MoveNamespace(self)
-        self._evolution_ns = EvolutionNamespace(self)
-        self._contest_ns = ContestNamespace(self)
-
-    @property
-    def pokemon(self):
-        return self._pokemon_ns
-
-    @property
-    def berry(self):
-        return self._berry_ns
-
-    @property
-    def item(self):
-        return self._item_ns
-
-    @property
-    def encounter(self):
-        return self._encounter_ns
-
-    @property
-    def move(self):
-        return self._move_ns
-
-    @property
-    def evolution(self):
-        return self._evolution_ns
-
-    @property
-    def contest(self):
-        return self._contest_ns
+    pokemon: PokemonNamespace
+    berry: BerryNamespace
+    item: ItemNamespace
+    encounter: EncountersNamespace
+    move: MoveNamespace
+    evolution: EvolutionNamespace
+    contest: ContestNamespace
 
     @parsed_response(DICT_OR_NONE)
     async def get_generation(self, name_or_id: t.Union[str, int]):

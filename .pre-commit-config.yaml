@@ -9,9 +9,7 @@ repos:
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-        exclude: "samples/|^.swm"
       - id: ruff-format
-        exclude: "samples/|^.swm"
   - repo: local
     hooks:
       - id: pyright
@@ -21,4 +19,3 @@ repos:
         entry: "poetry run pyright"
         require_serial: true  # use require_serial so that script is only called once per commit
         verbose: true  # print the number of files as a sanity-check
-        exclude: "^scripts|^commands"

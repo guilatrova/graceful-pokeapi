@@ -39,7 +39,7 @@ build_command = "pip install poetry && poetry build"
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<4.0"
-gracy = "^1.30.0"
+gracy = "^1.31.0"
 
 
 [tool.poetry.group.dev.dependencies]
