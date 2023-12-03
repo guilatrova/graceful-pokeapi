@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import typing as t
 from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_response
 from gracy.replays.storages.sqlite import SQLiteReplayStorage

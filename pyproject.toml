@@ -65,6 +65,7 @@ line-ending = "auto"
 
 [tool.ruff.lint.isort]
 extra-standard-library = ["pytest", "gracy", "httpx"]
+required-imports = ["from __future__ import annotations"]
 
 # https://microsoft.github.io/pyright/#/configuration
 [tool.pyright]

@@ -1,4 +1,5 @@
 """This is a Gracy script intedend to generate TEST data, so we can retest without hitting the API"""
+from __future__ import annotations
 
 import asyncio
 import typing as t
