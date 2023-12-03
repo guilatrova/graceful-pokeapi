@@ -1,8 +1,8 @@
 import typing as t
+from gracy import GracyNamespace, parsed_response
 
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.models import pokemons as models
-from gracy import GracyNamespace, parsed_response
 
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
 

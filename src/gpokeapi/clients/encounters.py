@@ -1,5 +1,4 @@
 import typing as t
-
 from gracy import GracyNamespace, parsed_response
 
 from gpokeapi.endpoints import PokeApiEndpoint

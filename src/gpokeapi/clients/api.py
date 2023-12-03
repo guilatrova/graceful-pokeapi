@@ -1,4 +1,6 @@
 import typing as t
+from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_response
+from gracy.replays.storages.sqlite import SQLiteReplayStorage
 from http import HTTPStatus
 
 from gpokeapi.clients.berries import BerryNamespace
@@ -10,8 +12,6 @@ from gpokeapi.clients.moves import MoveNamespace
 from gpokeapi.clients.pokemons import PokemonNamespace
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.replays import InMemoryStorage
-from gracy import Gracy, GracyConfig, GracyReplay, LogEvent, LogLevel, parsed_response
-from gracy.replays.storages.sqlite import SQLiteReplayStorage
 
 CACHE_TYPE = t.Union[t.Literal["memory", "sqlite"], GracyReplay]
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]

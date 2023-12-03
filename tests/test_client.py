@@ -16,7 +16,7 @@ from gpokeapi import PokeApi
     ],
 )
 async def test_get_pokemon(test_client: PokeApi, pokemon_name: str, pokemon_id: int):
-    result = await test_client.get_pokemon(pokemon_name)
+    result = await test_client.pokemon.get_one(pokemon_name)
 
     assert isinstance(result, dict)
     assert result["name"] == pokemon_name
@@ -24,5 +24,5 @@ async def test_get_pokemon(test_client: PokeApi, pokemon_name: str, pokemon_id: 
 
 
 async def test_get_nonexisting_pokemon(test_client: PokeApi):
-    result = await test_client.get_pokemon("FAKE")
+    result = await test_client.pokemon.get_one("FAKE")
     assert result is None

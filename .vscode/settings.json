@@ -6,10 +6,11 @@
             120
         ],
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
+            "source.fixAll.ruff": true,
+            "source.organizeImports.ruff": true
+        },
     },
     "python.testing.pytestArgs": [
         "src/tests"

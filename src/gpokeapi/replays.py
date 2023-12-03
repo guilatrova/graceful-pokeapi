@@ -1,8 +1,7 @@
+import httpx
 import logging
 import typing as t
 from datetime import datetime
-
-import httpx
 from gracy import GracyReplayStorage
 from gracy.exceptions import GracyReplayRequestNotFound
 

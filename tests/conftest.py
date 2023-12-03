@@ -1,6 +1,5 @@
 import pytest
 import typing as t
-
 from gracy import GracyReplay
 from gracy.replays.storages.sqlite import SQLiteReplayStorage
 

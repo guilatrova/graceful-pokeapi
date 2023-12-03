@@ -1,28 +1,24 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.4.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/psf/black
-    rev: 23.7.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.5
     hooks:
-      - id: black
-  - repo: https://github.com/pycqa/flake8
-    rev: 6.0.0
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        exclude: "samples/|^.swm"
+      - id: ruff-format
+        exclude: "samples/|^.swm"
+  - repo: local
     hooks:
-      - id: flake8
-        exclude: samples/
-  - repo: https://github.com/timothycrosley/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.4.1
-    hooks:
-      - id: mypy
-        additional_dependencies: [types-toml==0.1.3]
-  - repo: https://github.com/guilatrova/tryceratops
-    rev: v2.3.2
-    hooks:
-      - id: tryceratops
+      - id: pyright
+        name: pyright
+        language: system
+        types: [python]
+        entry: "poetry run pyright"
+        require_serial: true  # use require_serial so that script is only called once per commit
+        verbose: true  # print the number of files as a sanity-check
+        exclude: "^scripts|^commands"

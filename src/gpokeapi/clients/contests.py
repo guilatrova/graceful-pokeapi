@@ -1,8 +1,8 @@
 import typing as t
+from gracy import GracyNamespace, parsed_response
 
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.models import contests as models
-from gracy import GracyNamespace, parsed_response
 
 
 class ContestNamespace(GracyNamespace[PokeApiEndpoint]):

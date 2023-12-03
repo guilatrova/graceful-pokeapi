@@ -2,7 +2,6 @@
 
 import asyncio
 import typing as t
-
 from gracy import GracyReplay
 from gracy.replays.storages.sqlite import SQLiteReplayStorage
 
@@ -26,7 +25,7 @@ async def generate():
     record_cache = GracyReplay("record", TEST_STORAGE)
     client = PokeApi(cache=record_cache)
 
-    tasks = [asyncio.create_task(client.get_pokemon(p)) for p in POKEMONS]
+    tasks = [asyncio.create_task(client.pokemon.get_one(p)) for p in POKEMONS]
 
     await asyncio.gather(*tasks)
 
