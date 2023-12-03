@@ -30,7 +30,7 @@ class FlavorTextEntriesItem(BaseFlavorText):
     """The game version this flavor text is extracted from."""
 
 
-class AbilityPokemon(t.TypedDict):
+class AbilityPokemonRef(t.TypedDict):
     is_hidden: bool
     """Whether or not this a hidden ability for the referenced Pokémon."""
 
@@ -72,7 +72,7 @@ class PokemonAbility(t.TypedDict):
     flavor_text_entries: t.List[FlavorTextEntriesItem]
     """The flavor text of this ability listed in different languages."""
 
-    pokemon: t.List[AbilityPokemon]
+    pokemon: t.List[AbilityPokemonRef]
     """A list of Pokémon that could potentially have this ability."""
 
 
@@ -180,3 +180,129 @@ class GrowthRates(t.TypedDict):
 
     pokemon_species: t.List[ResourceReference]
     """A list of Pokémon species that gain levels at this growth rate."""
+
+
+class NatureName(t.TypedDict):
+    name: str
+
+    language: ResourceReference
+
+
+class NatureStatChange(t.TypedDict):
+    max_change: int
+    """The amount of change."""
+
+    pokeathlon_stat: ResourceReference
+    """The stat being affected."""
+
+
+class MoveBattleStylePreference(t.TypedDict):
+    low_hp_preference: int
+    """Chance of using the move, in percent, if HP is under one half."""
+
+    high_hp_preference: int
+    """Chance of using the move, in percent, if HP is over one half."""
+
+    pokeathlon_stat: ResourceReference
+    """The move battle style."""
+
+
+class Nature(t.TypedDict):
+    """Natures influence how a Pokémon's stats grow.
+    See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Nature) for greater detail.
+    """
+
+    id: int
+    """The identifier for this resource."""
+
+    name: str
+    """The name for this resource."""
+
+    decreased_stat: ResourceReference
+    """The stat decreased by 10% in Pokémon with this nature."""
+
+    increased_stat: ResourceReference
+    """The stat increased by 10% in Pokémon with this nature."""
+
+    likes_flavor: ResourceReference
+    """The flavor liked by Pokémon with this nature."""
+
+    hates_flavor: ResourceReference
+    """The flavor hated by Pokémon with this nature."""
+
+    pokeathlon_stat_changes: t.List[NatureStatChange]
+    """A list of Pokéathlon stats this nature effects and how much it effects them."""
+
+    move_battle_style_preferences: t.List[MoveBattleStylePreference]
+    """A list of battle styles and how likely a Pokémon with this nature is to
+    use them in the Battle Palace or Battle Tent."""
+
+    names: t.List[NatureName]
+    """The name of this resource listed in different languages."""
+
+
+class Pokemon(t.TypedDict):
+    """Pokémon are the creatures that inhabit the world of the Pokémon games.
+    They can be caught using Pokéballs and trained by battling with other Pokémon.
+
+    Each Pokémon belongs to a specific species but may take on a variant which makes it
+    differ from other Pokémon of the same species, such as base stats, available abilities
+    and typings.
+
+    See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_(species)) for greater detail."""
+
+    id: int
+    """The identifier for this resource."""
+
+    name: str
+    """The name for this resource."""
+
+    base_experience: int
+    """The base experience gained for defeating this Pokémon."""
+
+    height: int
+    """The height of this Pokémon in decimetres."""
+
+    is_default: bool
+    """Set for exactly one Pokémon used as the default for each species."""
+
+    order: int
+    """Order for sorting. Almost national order, except families are grouped together."""
+
+    weight: int
+    """The weight of this Pokémon in hectograms."""
+
+    abilities: t.List[AbilityPokemonRef]
+    """A list of abilities this Pokémon could potentially have."""
+
+    forms: t.List[ResourceReference]
+    """A list of forms this Pokémon can take on."""
+
+    game_indices: t.List[t.Dict]
+    """A list of game indices relevent to Pokémon item by generation."""
+
+    held_items: t.List[t.Dict]
+    """A list of items this Pokémon may be holding when encountered."""
+
+    location_area_encounters: str
+    """A link to a list of location areas, as well as encounter details pertaining to specific versions."""
+
+    moves: t.List[t.Dict]
+    """A list of moves along with learn methods and level details pertaining to specific version groups."""
+
+    past_types: t.List[t.Dict]
+    """A list of details showing types this pokémon had in previous generations"""
+
+    sprites: t.List[t.Dict]
+    """A set of sprites used to depict this Pokémon in the game.
+    A visual representation of the various sprites can be found at
+    [PokeAPI/sprites](https://github.com/PokeAPI/sprites#sprites)"""
+
+    species: ResourceReference
+    """The species this Pokémon belongs to."""
+
+    stats: t.List[t.Dict]
+    """A list of base stat values for this Pokémon."""
+
+    types: t.List[t.Dict]
+    """A list of details showing types this Pokémon has."""

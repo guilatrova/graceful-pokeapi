@@ -58,6 +58,7 @@ class PokeApiEndpoint(BaseEndpoint):
     POKEDEX = "/pokedex/{KEY}"
 
     # Pokemon Namespace
+    POKEMON_LIST = "/pokemon/"
     POKEMON = "/pokemon/{KEY}"
     POKEMON_ENCOUNTERS = "/pokemon/{KEY}/encounters"
     POKEMON_COLOR = "/pokemon-color/{KEY}"

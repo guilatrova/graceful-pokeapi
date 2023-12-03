@@ -1,14 +1,27 @@
 import typing as t
-from gracy import GracyNamespace, parsed_response
+from gracy import GracyNamespace, GracyOffsetPaginator, parsed_response
 
 from gpokeapi.endpoints import PokeApiEndpoint
 from gpokeapi.models import pokemons as models
+from gpokeapi.models.base import ResourceList
 
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
 
 
 class PokemonNamespace(GracyNamespace[PokeApiEndpoint]):
-    @parsed_response(DICT_OR_NONE)
+    @parsed_response(ResourceList)
+    async def list(self, offset: int = 0, limit: int = 20):
+        params = dict(offset=offset, limit=limit)
+        return await self.get(PokeApiEndpoint.POKEMON_LIST, params=params)
+
+    def paginate(self, limit: int = 20) -> GracyOffsetPaginator[ResourceList]:
+        return GracyOffsetPaginator[ResourceList](
+            gracy_func=self.list,
+            has_next=lambda r: bool(r["next"]) if r else True,
+            page_size=limit,
+        )
+
+    @parsed_response(models.Pokemon)
     async def get_one(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.POKEMON, dict(KEY=str(name_or_id)))
 
@@ -44,7 +57,7 @@ class PokemonNamespace(GracyNamespace[PokeApiEndpoint]):
     async def get_growth_rate(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.GROWTH_RATE, dict(KEY=str(name_or_id)))
 
-    @parsed_response(DICT_OR_NONE)
+    @parsed_response(models.Nature)
     async def get_nature(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.NATURE, dict(KEY=str(name_or_id)))
 
@@ -52,7 +65,7 @@ class PokemonNamespace(GracyNamespace[PokeApiEndpoint]):
     async def get_pokeathlon_stat(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.POKEATHLON_STAT, dict(KEY=str(name_or_id)))
 
-    @parsed_response(models.AbilityPokemon)
+    @parsed_response(models.AbilityPokemonRef)
     async def get_ability(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.ABILITY, dict(KEY=str(name_or_id)))
 
