@@ -18,7 +18,7 @@ class ContestType(t.TypedDict):
     berry_flavor: ResourceReference
     """The berry flavor that correlates with this contest type."""
 
-    names: list[ContestName]
+    names: t.List[ContestName]
     """The name of this contest type listed in different languages."""
 
 
@@ -37,10 +37,10 @@ class ContestEffect(t.TypedDict):
     jam: int
     """The base number of hearts the user's opponent loses."""
 
-    effect_entries: list[EffectEntry]
+    effect_entries: t.List[EffectEntry]
     """The result of this contest effect listed in different languages."""
 
-    flavor_text_entries: list[FlavorText]
+    flavor_text_entries: t.List[FlavorText]
     """The flavor text of this contest effect listed in different languages."""
 
 
@@ -51,8 +51,8 @@ class SuperContestEffect(t.TypedDict):
     appeal: int
     """The base number of hearts the user of this move gets."""
 
-    flavor_text_entries: list[FlavorText]
+    flavor_text_entries: t.List[FlavorText]
     """The flavor text of this contest effect listed in different languages."""
 
-    moves: list[ResourceReference]
+    moves: t.List[ResourceReference]
     """A list of moves that have the effect when used in super contests."""

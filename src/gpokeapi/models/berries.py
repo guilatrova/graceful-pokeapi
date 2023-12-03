@@ -45,7 +45,7 @@ class Berry(t.TypedDict):
     firmness: ResourceReference
     """	The firmness of this berry, used in making Pokéblocks or Poffins."""
 
-    flavors: list[FlavorBerryMap]
+    flavors: t.List[FlavorBerryMap]
     """A list of references to each flavor a berry can have and the potency of each of
     those flavors in regard to this berry."""
 
@@ -66,10 +66,10 @@ class BerryFirmness(t.TypedDict):
     name: str
     """The name for this resource."""
 
-    berries: list[ResourceReference]
+    berries: t.List[ResourceReference]
     """A list of the berries with this firmness."""
 
-    names: list[ResourceName]
+    names: t.List[ResourceName]
     """The name of this resource listed in different languages."""
 
 
@@ -84,11 +84,11 @@ class BerryFlavor(t.TypedDict):
     name: str
     """The name for this resource."""
 
-    berries: list[FlavorBerryMap]
+    berries: t.List[FlavorBerryMap]
     """A list of the berries with this flavor."""
 
     contest_type: ResourceReference
     """The contest type that correlates with this berry flavor."""
 
-    names: list[ResourceName]
+    names: t.List[ResourceName]
     """The name of this resource listed in different languages."""

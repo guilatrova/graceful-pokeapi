@@ -10,7 +10,7 @@ class ResourceName(t.TypedDict):
     name: str
     """The localized name for an API resource in a specific language."""
 
-    language: list[ResourceReference]
+    language: t.List[ResourceReference]
     """The language this name is in."""
 
 
@@ -32,5 +32,5 @@ class ResourceList(t.TypedDict):
     previous: t.Optional[str]
     """The URL for the previous page in the list."""
 
-    results: list[ResourceReference]
+    results: t.List[ResourceReference]
     """A list of named API resources."""
