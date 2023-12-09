@@ -35,6 +35,7 @@ version_toml = ["pyproject.toml:tool.poetry.version"]
 branch = "main"
 upload_to_pypi = true
 upload_to_release = true
+major_on_zero = true
 build_command = "pip install poetry && poetry build"
 
 [tool.poetry.dependencies]
