@@ -45,7 +45,7 @@ class PokemonNamespace(GracyNamespace[PokeApiEndpoint]):
     async def get_habitat(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.POKEMON_HABITAT, dict(KEY=str(name_or_id)))
 
-    @parsed_response(DICT_OR_NONE)
+    @parsed_response(base_models.PokemonShape)
     async def get_shape(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.POKEMON_SHAPE, dict(KEY=str(name_or_id)))
 

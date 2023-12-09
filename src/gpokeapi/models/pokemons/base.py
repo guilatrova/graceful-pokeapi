@@ -143,6 +143,27 @@ class PokemonForm(BasePokemonModel):
     """The form specific form name of this Pokémon form, or empty if the form does not have a specific name."""
 
 
+class AwesomeName(t.TypedDict):
+    awesome_name: str
+    """The localized "scientific" name for an API resource in a specific language."""
+
+    language: ResourceReference
+    """The language this "scientific" name is in."""
+
+
+class PokemonShape(BasePokemonModel):
+    """Shapes used for sorting Pokémon in a Pokédex."""
+
+    awesome_names: t.List[AwesomeName]
+    """The "scientific" name of this Pokémon shape listed in different languages."""
+
+    names: t.List[ResourceName]
+    """The name of this resource listed in different languages."""
+
+    pokemon_species: t.List[ResourceReference]
+    """A list of the Pokémon species that have this shape."""
+
+
 class GrowthRateExperienceLevel(t.TypedDict):
     level: int
     """The level gained."""
