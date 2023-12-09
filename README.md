@@ -75,9 +75,13 @@ client = PokeApi(cache="sqlite")
 client = PokeApi(cache=custom_gracy_replay) # Extend with your own
 ```
 
+### Parsers
+
+... todo
+
 ### More
 
-You can implement throttling, parsers, logging, retry logic and anything else by extending the class and setting your own settings.
+You can implement throttling, logging, retry logic and anything else by extending the class and setting your own settings.
 
 ```py
 from gracy import GracyConfig
