@@ -2,9 +2,7 @@
     <img width="200px" src="./img/logo.svg">
 </p>
 
-
 <h2 align="center">Graceful PokeApi</h2>
-
 
 <p align="center">
   <!-- CI --><a href="https://github.com/guilatrova/graceful-pokeapi/actions"><img alt="Actions Status" src="https://github.com/guilatrova/graceful-pokeapi/workflows/CI/badge.svg"></a>
@@ -50,6 +48,21 @@ async def main():
   print(pokemon)  # outputs NONE
 ```
 
+## Capabilities Comparison
+
+| API                  | [Pokebase](https://github.com/PokeAPI/pokebase) | [Pokepy](https://github.com/PokeAPI/pokepy) | [aiopokeapi](https://github.com/beastmatser/aiopokeapi) | Graceful PokeAPI                         |
+| -------------------- | ----------------------------------------------- | ------------------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
+| Async                | ❌                                               | ❌                                           | ✅                                                       | ✅                                        |
+| Type hints           | ❌                                               | ❌                                           | ✅ Data Class                                            | ✅ TypedDict                              |
+| Caching              | ✅ File                                          | ✅ File                                      | ✅ Memory                                                | ✅ SQLite, Memory, or custom (extensible) |
+| Resource Pagination  | ✅                                               | ❓                                           | ❌                                                       | ✅                                        |
+| Customizable         | ❌                                               | ❌                                           | ❌                                                       | ✅                                        |
+| Interactive Sessions | ❌                                               | ❌                                           | ❌                                                       | 🔜                                        |
+
+## Customization
+
+Since PokeAPI uses [Gracy](https://github.com/guilatrova/gracy) everything is customizable.
+
 ### Cache Types
 
 This API Client caches the requests by default through [Gracy Replays](https://github.com/guilatrova/gracy#replay-requests).
@@ -62,9 +75,7 @@ client = PokeApi(cache="sqlite")
 client = PokeApi(cache=custom_gracy_replay) # Extend with your own
 ```
 
-## Customization
-
-Since PokeAPI uses Gracy, everything is customizable.
+### More
 
 You can implement throttling, parsers, logging, retry logic and anything else by extending the class and setting your own settings.
 
@@ -88,6 +99,5 @@ class MyCustomPokeApi(PokeApi):
             log_request=LogEvent(LogLevel.INFO),
         )
 ```
-
 
 You can find all available options on [Gracy's documentation](https://github.com/guilatrova/gracy).
