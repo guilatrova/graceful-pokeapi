@@ -3,6 +3,14 @@ from __future__ import annotations
 import typing as t
 
 
+class BasePokemonModel(t.TypedDict):
+    id: int
+    """The identifier for this resource."""
+
+    name: str
+    """The name for this resource."""
+
+
 class ResourceReference(t.TypedDict):
     name: str
     url: str

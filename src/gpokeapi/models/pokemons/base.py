@@ -2,80 +2,9 @@ from __future__ import annotations
 
 import typing as t
 
-from gpokeapi.models.base import FlavorText as BaseFlavorText
-from gpokeapi.models.base import ResourceName, ResourceReference
+from gpokeapi.models.base import BasePokemonModel, ResourceName, ResourceReference
 
-
-class Effect(t.TypedDict):
-    effect: str
-    """	The localized effect text for an API resource in a specific language."""
-
-    language: ResourceReference
-    """The language this effect is in."""
-
-
-class VerboseEffect(Effect):
-    short_effect: str
-    """The localized effect text in brief."""
-
-
-class AbilityEffectChange(t.TypedDict):
-    version_group: ResourceReference
-    """The version group in which the previous effect of this ability originated."""
-
-    effect_entries: t.List[Effect]
-    """The previous effect of this ability listed in different languages."""
-
-
-class FlavorTextEntriesItem(BaseFlavorText):
-    version_group: ResourceReference
-    """The game version this flavor text is extracted from."""
-
-
-class AbilityPokemonRef(t.TypedDict):
-    is_hidden: bool
-    """Whether or not this a hidden ability for the referenced Pokémon."""
-
-    slot: int
-    """Pokémon have 3 ability 'slots' which hold references to possible abilities they could have.
-    This is the slot of this ability for the referenced pokemon."""
-
-    pokemon: ResourceReference
-    """The Pokémon this ability could belong to."""
-
-
-class PokemonAbility(t.TypedDict):
-    """Abilities provide passive effects for Pokémon in battle or in the overworld.
-    Pokémon have multiple possible abilities but can have only one ability at a time.
-    Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Ability) for greater detail.
-    """
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
-
-    is_main_series: bool
-    """Whether or not this ability originated in the main series of the video games."""
-
-    generation: ResourceReference
-    """The generation this ability originated in."""
-
-    names: t.List[ResourceName]
-    """The name of this resource listed in different languages."""
-
-    effect_entries: t.List[VerboseEffect]
-    """The effect of this ability listed in different languages."""
-
-    effect_changes: t.List[AbilityEffectChange]
-    """The list of previous effects this ability has had across version groups."""
-
-    flavor_text_entries: t.List[FlavorTextEntriesItem]
-    """The flavor text of this ability listed in different languages."""
-
-    pokemon: t.List[AbilityPokemonRef]
-    """A list of Pokémon that could potentially have this ability."""
+from .abilities import AbilityPokemonRef
 
 
 class Description(t.TypedDict):
@@ -108,16 +37,22 @@ class PokemonCharacteristics(t.TypedDict):
     """	The descriptions of this characteristic listed in different languages."""
 
 
-class EggGroup(t.TypedDict):
+class PokemonColor(BasePokemonModel):
+    """Colors used for sorting Pokémon in a Pokédex.
+    The color listed in the Pokédex is usually the color most apparent or covering each Pokémon's body.
+    No orange category exists; Pokémon that are primarily orange are listed as red or brown."""
+
+    names: t.List[ResourceName]
+    """The name of this resource listed in different languages."""
+
+    pokemon_species: t.List[ResourceReference]
+    """A list of the Pokémon species that have this color."""
+
+
+class EggGroup(BasePokemonModel):
     """Egg Groups are categories which determine which Pokémon are able to interbreed. Pokémon may belong to either
     one or two Egg Groups. Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Egg_Group) for greater detail.
     """
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
 
     names: ResourceName
     """The name of this resource listed in different languages."""
@@ -134,22 +69,78 @@ class PokemonSpeciesDetails(t.TypedDict):
     """A Pokémon species that can be the referenced gender."""
 
 
-class PokemonGender(t.TypedDict):
+class PokemonGender(BasePokemonModel):
     """Genders were introduced in Generation II for the purposes of breeding Pokémon but can also result in
     visual differences or even different evolutionary lines.
     Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Gender) for greater detail."""
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
 
     pokemon_species_details: t.List[PokemonSpeciesDetails]
     """A list of Pokémon species that can be this gender and how likely it is that they will be."""
 
     required_for_evolution: t.List[ResourceReference]
     """A list of Pokémon species that required this gender in order for a Pokémon to evolve into them."""
+
+
+class PokemonFormType(t.TypedDict):
+    slot: int
+    """The order the Pokémon's types are listed in."""
+
+    type: ResourceReference
+    """The type the referenced Form has."""
+
+
+class PokemonFormSprites(t.TypedDict):
+    front_default: str
+    """The default depiction of this Pokémon form from the front in battle."""
+    front_shiny: str
+    """The shiny depiction of this Pokémon form from the front in battle."""
+    back_default: str
+    """The default depiction of this Pokémon form from the back in battle."""
+    back_shiny: str
+    """The shiny depiction of this Pokémon form from the back in battle."""
+
+
+class PokemonForm(BasePokemonModel):
+    """Some Pokémon may appear in one of multiple, visually different forms.
+    These differences are purely cosmetic. For variations within a Pokémon species, which do differ in more than
+    just visuals, the 'Pokémon' entity is used to represent such a variety."""
+
+    order: int
+    """The order in which forms should be sorted within all forms.
+    Multiple forms may have equal order, in which case they should fall back on sorting by name."""
+
+    form_order: int
+    """The order in which forms should be sorted within a species' forms."""
+
+    is_default: bool
+    """True for exactly one form used as the default for each Pokémon."""
+
+    is_battle_only: bool
+    """Whether or not this form can only happen during battle."""
+
+    is_mega: bool
+    """Whether or not this form requires mega evolution."""
+
+    form_name: str
+    """The name of this form"""
+
+    pokemon: ResourceReference
+    """The Pokémon that can take on this form."""
+
+    types: t.List[PokemonFormType]
+    """A list of details showing types this Pokémon form has."""
+
+    sprites: PokemonFormSprites
+    """A set of sprites used to depict this Pokémon form in the game."""
+
+    version_group: ResourceName
+    """The version group this Pokémon form was introduced in."""
+
+    names: t.List[ResourceName]
+    """The form specific full name of this Pokémon form, or empty if the form does not have a specific name."""
+
+    form_names: t.List[ResourceName]
+    """The form specific form name of this Pokémon form, or empty if the form does not have a specific name."""
 
 
 class GrowthRateExperienceLevel(t.TypedDict):
@@ -160,16 +151,10 @@ class GrowthRateExperienceLevel(t.TypedDict):
     """The amount of experience required to reach the referenced level."""
 
 
-class GrowthRates(t.TypedDict):
+class GrowthRates(BasePokemonModel):
     """Growth rates are the speed with which Pokémon gain levels through experience.
     Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Experience) for greater detail.
     """
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
 
     formula: str
     """The formula used to calculate the rate at which the Pokémon species gains level."""
@@ -209,16 +194,10 @@ class MoveBattleStylePreference(t.TypedDict):
     """The move battle style."""
 
 
-class Nature(t.TypedDict):
+class Nature(BasePokemonModel):
     """Natures influence how a Pokémon's stats grow.
     See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Nature) for greater detail.
     """
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
 
     decreased_stat: ResourceReference
     """The stat decreased by 10% in Pokémon with this nature."""
@@ -243,7 +222,7 @@ class Nature(t.TypedDict):
     """The name of this resource listed in different languages."""
 
 
-class Pokemon(t.TypedDict):
+class Pokemon(BasePokemonModel):
     """Pokémon are the creatures that inhabit the world of the Pokémon games.
     They can be caught using Pokéballs and trained by battling with other Pokémon.
 
@@ -252,12 +231,6 @@ class Pokemon(t.TypedDict):
     and typings.
 
     See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_(species)) for greater detail."""
-
-    id: int
-    """The identifier for this resource."""
-
-    name: str
-    """The name for this resource."""
 
     base_experience: int
     """The base experience gained for defeating this Pokémon."""
@@ -308,3 +281,14 @@ class Pokemon(t.TypedDict):
 
     types: t.List[t.Dict]
     """A list of details showing types this Pokémon has."""
+
+
+class PokemonHabitat(BasePokemonModel):
+    """Habitats are generally different terrain Pokémon can be found in but can also be areas designated
+    for rare or legendary Pokémon."""
+
+    names: t.List[ResourceName]
+    """The name of this resource listed in different languages."""
+
+    pokemon_species: t.List[ResourceReference]
+    """A list of the Pokémon species that can be found in this habitat."""
