@@ -8,6 +8,7 @@ from gpokeapi.models.base import ResourceList
 from gpokeapi.models.pokemons import abilities as ability_models
 from gpokeapi.models.pokemons import base as base_models
 from gpokeapi.models.pokemons import encounters as encounter_models
+from gpokeapi.models.pokemons import pokeathlons as pokeathlons_models
 
 DICT_OR_NONE = t.Union[t.Dict[str, t.Any], None]
 
@@ -65,7 +66,7 @@ class PokemonNamespace(GracyNamespace[PokeApiEndpoint]):
     async def get_nature(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.NATURE, dict(KEY=str(name_or_id)))
 
-    @parsed_response(DICT_OR_NONE)
+    @parsed_response(pokeathlons_models.PokeathlonStat)
     async def get_pokeathlon_stat(self, name_or_id: t.Union[str, int]):
         return await self.get(PokeApiEndpoint.POKEATHLON_STAT, dict(KEY=str(name_or_id)))
 

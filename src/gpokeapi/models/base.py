@@ -13,7 +13,10 @@ class BasePokemonModel(t.TypedDict):
 
 class ResourceReference(t.TypedDict):
     name: str
+    """The name of the referenced resource."""
+
     url: str
+    """The URL of the referenced resource."""
 
 
 class ResourceName(t.TypedDict):
