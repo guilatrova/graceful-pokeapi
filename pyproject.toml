@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gpokeapi"
-version = "0.2.0"
+version = "0.3.0"
 description = "Asynchronous PokeAPI client extensible powered by Gracy"
 authors = ["Guilherme Latrova <hello@guilatrova.dev>"]
 license = "MIT"
